@@ -2,8 +2,8 @@
   "name": "@vived/core",
   "version": "1.0.0",
   "description": "Core Components for VIVED Apps and Hosts",
-  "main": "index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest --watch --config jestconfig.json",
     "testOnce": "jest --config jestconfig.json",
