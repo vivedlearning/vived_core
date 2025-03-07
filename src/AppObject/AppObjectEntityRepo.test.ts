@@ -70,7 +70,7 @@ describe("Observable Entity Repo", () => {
   it("Stops notifying if adding an entity replaces and exisitng entity", () => {
     const { repo, observer, appObj } = makeTestRig();
 
-    console.warn = jest.fn(); //Replacing warns. This keeps the console clean
+    console.warn = jest.fn(); // Replacing warns. This keeps the console clean
 
     const original =new MockAppEntity(appObj);
     repo.add(original);

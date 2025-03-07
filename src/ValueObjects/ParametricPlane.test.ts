@@ -17,7 +17,7 @@ test("Setting from point and normal", () => {
 });
 
 test("From three points", () => {
-  //From https://keisan.casio.com/exec/system/1223596129
+  // From https://keisan.casio.com/exec/system/1223596129
   const A = new Vector3(1, 2, -2);
   const B = new Vector3(3, -2, 1);
   const C = new Vector3(5, 1, -4);
@@ -49,7 +49,7 @@ test("Intersection", () => {
 });
 
 test("Intersection", () => {
-  //From http://www.ambrsoft.com/TrigoCalc/Plan3D/PlaneLineIntersection_.htm
+  // From http://www.ambrsoft.com/TrigoCalc/Plan3D/PlaneLineIntersection_.htm
 
   const line1 = new Vector3(4, 1, 1);
   const line2 = new Vector3(8, -2, -2);
@@ -70,12 +70,12 @@ test("Intersection", () => {
 test("If parallel, intersect should come back undefined", () => {
   const line1 = new Vector3(0, 1, 0);
   const line2 = new Vector3(0, -1, 0);
-  const line = ParametricLine.FromTwoPoint(line1, line2); //Vertical line going through the origin
+  const line = ParametricLine.FromTwoPoint(line1, line2); // Vertical line going through the origin
 
   const plane1 = new Vector3(0, 0, 0);
   const plane2 = new Vector3(0, 1, 0);
   const plane3 = new Vector3(0, 0, 1);
-  const plane = ParametricPlane.FromThreePoints(plane1, plane2, plane3); //y-z plane
+  const plane = ParametricPlane.FromThreePoints(plane1, plane2, plane3); // y-z plane
 
   const intersect = plane.intersectLine(line);
 

@@ -41,7 +41,7 @@ describe("Quaterion Value Object", () => {
   });
 
   it("Multiplies two quaternions", () => {
-    //See https://www.omnicalculator.com/math/quaternion
+    // See https://www.omnicalculator.com/math/quaternion
     const quat1 = new Quaternion(1, 2, 3, 4);
     const quat2 = new Quaternion(5, 6, 7, 8);
     const product = Quaternion.Multiply(quat1, quat2);

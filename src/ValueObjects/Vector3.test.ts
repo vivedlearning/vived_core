@@ -120,7 +120,7 @@ describe("Vector 3 Value object - Static actions", () => {
   });
 
   it("Computes the cross product", () => {
-    //From https://www.symbolab.com/solver/vector-cross-product-calculator
+    // From https://www.symbolab.com/solver/vector-cross-product-calculator
     const v1 = new Vector3(1, 2, 3);
     const v2 = new Vector3(4, 5, -6);
 

@@ -189,7 +189,7 @@ describe("Matrix Value Object", () => {
     );
 
     const composed = Matrix.Compose(scale, rot, pos);
-    expect(composed.determinate).toBeCloseTo(335.99999908851385); //Number is from babylon
+    expect(composed.determinate).toBeCloseTo(335.99999908851385); // Number is from babylon
   });
 
   it("Returns the translation", () => {
@@ -267,13 +267,13 @@ describe("Matrix Value Object", () => {
     const m1 = new Matrix(sequentialArray);
     const biggerValues: MatrixArray = [...sequentialArray];
     biggerValues.forEach((val, i) => {
-      biggerValues[i] = val + 0.01; //Just a little bump
+      biggerValues[i] = val + 0.01; // Just a little bump
     });
     const bigger = new Matrix(biggerValues);
 
     const smallerValues: MatrixArray = [...sequentialArray];
     smallerValues.forEach((val, i) => {
-      smallerValues[i] = val - 0.01; //Just a little bump
+      smallerValues[i] = val - 0.01; // Just a little bump
     });
     const smaller = new Matrix(smallerValues);
 
