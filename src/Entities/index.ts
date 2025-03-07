@@ -1,5 +1,3 @@
-export * from "./ObservableEntity";
-export * from "./ObserverList";
 export * from "./MemoizedAngle";
 export * from "./MemoizedBoolean";
 export * from "./MemoizedColor";
@@ -8,3 +6,6 @@ export * from "./MemoizedQuaternion";
 export * from "./MemoizedString";
 export * from "./MemoizedVector2";
 export * from "./MemoizedVector3";
+export * from "./ObservableEntity";
+export * from "./ObserverList";
+export * from "./RangedNumber";
