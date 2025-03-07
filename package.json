@@ -1,0 +1,38 @@
+{
+  "name": "@vived/core",
+  "version": "1.0.0",
+  "description": "Core Components for VIVED Apps and Hosts",
+  "main": "index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "jest --watch --config jestconfig.json",
+    "testOnce": "jest --config jestconfig.json",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run testOnce && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/cyberscience3d/npm_vived_core.git"
+  },
+  "author": "Amos Patrick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/cyberscience3d/npm_vived_core/issues"
+  },
+  "homepage": "https://bitbucket.org/cyberscience3d/npm_vived_core#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "prettier": "^3.5.3",
+    "ts-jest": "^29.2.6",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^5.8.2"
+  }
+}
