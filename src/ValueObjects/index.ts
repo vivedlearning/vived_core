@@ -8,7 +8,4 @@ export * from "./Quaternion";
 export * from "./Rectangle";
 export * from "./Vector2";
 export * from "./Vector3";
-
-
-
-
+export * from "./Version";
