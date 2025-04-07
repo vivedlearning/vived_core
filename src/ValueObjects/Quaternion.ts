@@ -26,10 +26,10 @@ export class Quaternion {
 
   /**
    * Checks two quaternions to see if they are close
-   * @param a Quaterion A
-   * @param b Quaterion B
+   * @param a Quaternion A
+   * @param b Quaternion B
    * @param threshold "Close" threshold. Defaults to 0.001
-   * @returns True if each of Quaterion's components are within the threshold of each other
+   * @returns True if each of Quaternion's components are within the threshold of each other
    */
   public static Close(
     a: Quaternion,
@@ -55,7 +55,7 @@ export class Quaternion {
 
   /**
    * Multiplies A*B
-   * @param a Quaterion A
+   * @param a Quaternion A
    * @param b Quaternion B
    * @returns The result of A*B
    */
@@ -68,9 +68,9 @@ export class Quaternion {
   }
 
   /**
-   * Creates a new Quaterion from an array of values
-   * @param values The four values of the Quaterion: [x,y,z,w]
-   * @returns A Quaterion
+   * Creates a new Quaternion from an array of values
+   * @param values The four values of the Quaternion: [x,y,z,w]
+   * @returns A Quaternion
    */
   public static FromArray(
     values: [number, number, number, number]
@@ -79,7 +79,7 @@ export class Quaternion {
   }
 
   /**
-   * Creates a Quaterion from a Data Transfer Object
+   * Creates a Quaternion from a Data Transfer Object
    * @param dto The Data Transfer Object
    * @returns The Quaternion
    */
@@ -96,10 +96,10 @@ export class Quaternion {
   }
 
   /**
-   * Creates an quaterion about an axis for a given angle
+   * Creates a quaternion about an axis for a given angle
    * @param axis The rotation axis
    * @param angle The rotation angle
-   * @returns The resulting Quaterion
+   * @returns The resulting Quaternion
    */
   public static FromAngleAxis(axis: Vector3, angle: Angle): Quaternion {
     const sin = Math.sin(angle.radians / 2);
@@ -146,11 +146,11 @@ export class Quaternion {
   }
 
   /**
-   * Froms up a Quaternion from the Yaw-Pitch-Roll (Tait-Bryan) convetion
+   * Forms a Quaternion from the Yaw-Pitch-Roll (Tait-Bryan) convention
    * @param yaw defines the rotation around the y axis
    * @param pitch defines the rotation around the x axis
    * @param roll defines the rotation around the z axis
-   * @returns the resulting quaterion
+   * @returns the resulting quaternion
    */
   public static FromYawPitchRoll(
     yaw: Angle,
@@ -181,7 +181,7 @@ export class Quaternion {
    * @param x Rotation about the x axis
    * @param y Rotation about the y axis
    * @param z Rotation about the z axis
-   * @returns The Quaterion
+   * @returns The Quaternion
    */
   public static FromEuler(x: Angle, y: Angle, z: Angle) {
     return this.FromYawPitchRoll(y, x, z);
@@ -201,8 +201,8 @@ export class Quaternion {
     const diffQ = this.Multiply(aInv, b);
 
     const angDeg = diffQ.angle.degrees;
-    if(angDeg > 180) {
-      return Angle.FromDegrees(360 - angDeg)
+    if (angDeg > 180) {
+      return Angle.FromDegrees(360 - angDeg);
     } else {
       return diffQ.angle;
     }
@@ -211,9 +211,9 @@ export class Quaternion {
   /**
    * Spherically interpolates between two quaternions
    * @param initial The initial quaternion
-   * @param final The final quaterion
-   * @param percent The percent along the slerp. 0 will return the initial quaterion and 1 will return the final quaterion
-   * @returns The interpolated quaterion
+   * @param final The final quaternion
+   * @param percent The percent along the slerp. 0 will return the initial quaternion and 1 will return the final quaternion
+   * @returns The interpolated quaternion
    */
   public static Slerp(
     initial: Quaternion,
@@ -255,7 +255,7 @@ export class Quaternion {
   /**
    * Calculates a Quaternion from a rotation matrix
    * @param rotationMatrix A normalized, non-scaled rotation matrix
-   * @returns The Quaterion
+   * @returns The Quaternion
    */
   public static FromRotationMatrix(rotationMatrix: Matrix): Quaternion {
     const m = rotationMatrix.m;

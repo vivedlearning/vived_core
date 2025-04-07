@@ -2,50 +2,193 @@ import { ObservableEntity, ObserverList } from "../Entities";
 import { AppObject, makeAppObject } from "./AppObject";
 import { AppObjectComponent } from "./AppObjectComponent";
 
+/**
+ * Abstract repository class for managing AppObjects and their components.
+ *
+ * This class provides the interface for storing, retrieving, and managing application
+ * objects, their components, and singletons. It also includes logging functionality
+ * and observer pattern implementation for tracking changes to the repository.
+ *
+ * @extends ObservableEntity
+ */
 export abstract class AppObjectRepo extends ObservableEntity {
+  /**
+   * Checks if an AppObject with the specified ID exists in the repository.
+   *
+   * @param {string} appObjectID - The ID of the AppObject to check
+   * @returns {boolean} True if the AppObject exists, false otherwise
+   */
   abstract has(appObjectID: string): boolean;
+
+  /**
+   * Adds an AppObject to the repository.
+   *
+   * @param {AppObject} appObject - The AppObject to add
+   */
   abstract add(appObject: AppObject): void;
+
+  /**
+   * Removes an AppObject with the specified ID from the repository.
+   *
+   * @param {string} appObjectID - The ID of the AppObject to remove
+   */
   abstract remove(appObjectID: string): void;
+
+  /**
+   * Gets an AppObject by its ID.
+   *
+   * @param {string} appObjectID - The ID of the AppObject to retrieve
+   * @returns {AppObject | undefined} The AppObject if found, undefined otherwise
+   */
   abstract get(appObjectID: string): AppObject | undefined;
+
+  /**
+   * Gets an AppObject by its ID, or creates a new one if it doesn't exist.
+   *
+   * @param {string} appObjectID - The ID of the AppObject to retrieve or create
+   * @returns {AppObject} The existing or newly created AppObject
+   */
   abstract getOrCreate(appObjectID: string): AppObject;
+
+  /**
+   * Gets all AppObjects in the repository.
+   *
+   * @returns {AppObject[]} An array of all AppObjects
+   */
   abstract getAll(): AppObject[];
 
+  /**
+   * Logs an informational message.
+   *
+   * @param {string} sender - The identifier of the message sender
+   * @param {string} message - The message to log
+   */
   abstract submitLog(sender: string, message: string): void;
+
+  /**
+   * Logs a warning message.
+   *
+   * @param {string} sender - The identifier of the message sender
+   * @param {string} message - The warning message to log
+   */
   abstract submitWarning(sender: string, message: string): void;
+
+  /**
+   * Logs an error message.
+   *
+   * @param {string} sender - The identifier of the message sender
+   * @param {string} message - The error message to log
+   */
   abstract submitError(sender: string, message: string): void;
+
+  /**
+   * Logs a fatal error message.
+   *
+   * @param {string} sender - The identifier of the message sender
+   * @param {string} message - The fatal error message to log
+   */
   abstract submitFatal(sender: string, message: string): void;
 
+  /**
+   * Registers a component as a singleton in the repository.
+   *
+   * @param {AppObjectComponent} component - The component to register as a singleton
+   */
   abstract registerSingleton(component: AppObjectComponent): void;
+
+  /**
+   * Gets a singleton component of the specified type.
+   *
+   * @template T - Type of the component to retrieve, must extend AppObjectComponent
+   * @param {string} type - The type of the singleton to retrieve
+   * @returns {T | undefined} The singleton component if found, undefined otherwise
+   */
   abstract getSingleton<T extends AppObjectComponent>(
     type: string
   ): T | undefined;
 
+  /**
+   * Gets a component of the specified type from an AppObject.
+   *
+   * @template T - Type of the component to retrieve, must extend AppObjectComponent
+   * @param {string} appObjectID - The ID of the AppObject containing the component
+   * @param {string} type - The type of the component to retrieve
+   * @returns {T | undefined} The component if found, undefined otherwise
+   */
   abstract getAppObjectComponent<T extends AppObjectComponent>(
     appObjectID: string,
     type: string
   ): T | undefined;
+
+  /**
+   * Gets all AppObjects that have a component of the specified type.
+   *
+   * @param {string} componentType - The component type to filter by
+   * @returns {AppObject[]} An array of AppObjects having the specified component type
+   */
   abstract getAllAppObjectsWithComponent(componentType: string): AppObject[];
+
+  /**
+   * Gets all components of the specified type across all AppObjects.
+   *
+   * @template T - Type of the components to retrieve, must extend AppObjectComponent
+   * @param {string} type - The type of components to retrieve
+   * @returns {T[]} An array of all components of the specified type
+   */
   abstract getAllComponents<T extends AppObjectComponent>(type: string): T[];
 
+  /**
+   * Adds an observer to be notified when an AppObject is added to the repository.
+   *
+   * @param {(addedEntity: AppObject) => void} observer - The observer function
+   */
   abstract addAppObjectAddedObserver: (
     observer: (addedEntity: AppObject) => void
   ) => void;
+
+  /**
+   * Removes an observer previously registered for AppObject addition notifications.
+   *
+   * @param {(addedEntity: AppObject) => void} observer - The observer function to remove
+   */
   abstract removeAppObjectAddedObserver: (
     observer: (addedEntity: AppObject) => void
   ) => void;
 
+  /**
+   * Adds an observer to be notified when an AppObject is removed from the repository.
+   *
+   * @param {(addedEntity: AppObject) => void} observer - The observer function
+   */
   abstract addAppObjectRemovedObserver: (
     observer: (addedEntity: AppObject) => void
   ) => void;
+
+  /**
+   * Removes an observer previously registered for AppObject removal notifications.
+   *
+   * @param {(addedEntity: AppObject) => void} observer - The observer function to remove
+   */
   abstract removedAppObjectRemovedObserver: (
     observer: (addedEntity: AppObject) => void
   ) => void;
 }
 
+/**
+ * Creates and returns a new AppObjectRepo instance.
+ *
+ * @returns {AppObjectRepo} A new AppObjectRepo instance
+ */
 export function makeAppObjectRepo(): AppObjectRepo {
   return new AppObjectRepoImp();
 }
 
+/**
+ * Implementation of the AppObjectRepo abstract class.
+ *
+ * @private
+ * @extends AppObjectRepo
+ */
 class AppObjectRepoImp extends AppObjectRepo {
   private appObjectLookup = new Map<string, AppObject>();
   private singletons = new Map<string, AppObjectComponent>();

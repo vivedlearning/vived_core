@@ -9,12 +9,12 @@ describe("Vector 2 value object", () => {
   });
 
   it("Returns the magnitude", () => {
-    expect(new Vector2(0, 5).magnitued).toEqual(5);
-    expect(new Vector2(0, -5).magnitued).toEqual(5);
-    expect(new Vector2(5, 0).magnitued).toEqual(5);
-    expect(new Vector2(-5, 0).magnitued).toEqual(5);
-    expect(new Vector2(-1, -1).magnitued).toBeCloseTo(1.414);
-    expect(new Vector2(1, 1).magnitued).toBeCloseTo(1.414);
+    expect(new Vector2(0, 5).magnitude).toEqual(5);
+    expect(new Vector2(0, -5).magnitude).toEqual(5);
+    expect(new Vector2(5, 0).magnitude).toEqual(5);
+    expect(new Vector2(-5, 0).magnitude).toEqual(5);
+    expect(new Vector2(-1, -1).magnitude).toBeCloseTo(1.414);
+    expect(new Vector2(1, 1).magnitude).toBeCloseTo(1.414);
   });
 
   it("Returns the unit", () => {
@@ -151,14 +151,14 @@ describe("Vector 2 static actions", () => {
 
     expect(vec.dto).toEqual({
       x: 1,
-      y: 2
+      y: 2,
     });
   });
 
   it("Makes a vector from a DTO", () => {
     const vec = Vector2.FromDTO({
       x: 1,
-      y: 2
+      y: 2,
     });
 
     expect(vec.x).toEqual(1);

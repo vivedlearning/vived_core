@@ -22,7 +22,7 @@ export class Angle {
    * @param a Angle A
    * @param b Angle B
    * @param tolerance Tolerance for "Close" in degrees. Defaults to 0.001;
-   * @returns True if the difference between A and B (in degress) is less than the tolerance
+   * @returns True if the difference between A and B (in degrees) is less than the tolerance
    */
   public static Close(a: Angle, b: Angle, tolerance: number = 0.001): boolean {
     let diff = a.degrees - b.degrees;

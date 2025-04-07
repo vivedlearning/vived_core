@@ -36,16 +36,16 @@ export class LineSegment2D {
     const tNumerator = (x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4);
     const t = tNumerator / denominator;
 
-    const tTolearnce = tolerance / a.length;
-    if (t < -tTolearnce || t > 1 + tTolearnce) {
+    const tTolerance = tolerance / a.length;
+    if (t < -tTolerance || t > 1 + tTolerance) {
       return undefined;
     }
 
     const uNumerator = (x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3);
     const u = uNumerator / denominator;
 
-    const uTolearnce = tolerance / b.length;
-    if (u < -uTolearnce || u > 1 + uTolearnce) return undefined;
+    const uTolerance = tolerance / b.length;
+    if (u < -uTolerance || u > 1 + uTolerance) return undefined;
 
     const px = x1 + t * (x2 - x1);
     const py = y1 + t * (y2 - y1);
@@ -69,7 +69,7 @@ export class LineSegment2D {
     } else if (t > 1) {
       return line.end;
     } else {
-      const length = t * direction.magnitued;
+      const length = t * direction.magnitude;
       direction = Vector2.NewVectorOfLength(direction, length);
       return Vector2.Add(line.start, direction);
     }
@@ -79,7 +79,7 @@ export class LineSegment2D {
   readonly end: Vector2;
 
   public get length(): number {
-    return Vector2.Subtract(this.start, this.end).magnitued;
+    return Vector2.Subtract(this.start, this.end).magnitude;
   }
 
   public get direction(): Vector2 {

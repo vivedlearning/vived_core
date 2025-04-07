@@ -71,7 +71,7 @@ export class Vector2 {
     threshold: number = 0.01
   ): boolean => {
     const diff = Vector2.Subtract(a, b);
-    const diffMag = diff.magnitued;
+    const diffMag = diff.magnitude;
 
     if (diffMag < threshold) return true;
     else return false;
@@ -102,7 +102,7 @@ export class Vector2 {
   };
 
   /**
-   * Creates a new vector of a given lenght and a unit that is equal to the original vector
+   * Creates a new vector of a given length and a unit that is equal to the original vector
    * @param vector The original vector. This determines the unit of the final vector
    * @param length The desired length of the final vector
    * @returns The final vector
@@ -135,9 +135,9 @@ export class Vector2 {
    */
   public static AngleBetween = (a: Vector2, b: Vector2): Angle => {
     const dot = Vector2.Dot(a, b);
-    const magnitues = a.magnitued * b.magnitued;
+    const magnitudes = a.magnitude * b.magnitude;
 
-    const angRadians = Math.acos(dot / magnitues);
+    const angRadians = Math.acos(dot / magnitudes);
 
     return Angle.FromRadians(angRadians);
   };
@@ -158,19 +158,27 @@ export class Vector2 {
   /**
    * Get the magnitude (length) of the vector
    */
-  get magnitued(): number {
+  get magnitude(): number {
     const xSqr = this.x * this.x;
     const ySqr = this.y * this.y;
 
     const magnitude = Math.sqrt(xSqr + ySqr);
     return magnitude;
   }
+  
+  /**
+   * @deprecated Use magnitude instead - this property is kept for backward compatibility
+   * Get the magnitude (length) of the vector
+   */
+  get magnitued(): number {
+    return this.magnitude;
+  }
 
   /**
    * Get the unit vector
    */
   get unit(): Vector2 {
-    const mag = this.magnitued;
+    const mag = this.magnitude;
     if (mag === 0) {
       return Vector2.Zero();
     }
@@ -181,7 +189,7 @@ export class Vector2 {
   }
 
   /**
-   * Returns the angle of the direction of this angle in degrees.
+   * Returns the angle of the direction of this vector in degrees.
    * A right vector [1,0] will return 0, a left vector [-1,0] will return 180, an up vector [0,1] will return 90 and a down vector [0,-1] will return -90
    */
   get theta(): number {
@@ -189,7 +197,7 @@ export class Vector2 {
   }
 
   /**
-   * Retuns the vector as an array of numbers [x,y]
+   * Returns the vector as an array of numbers [x,y]
    */
   get array(): [number, number] {
     return [this.x, this.y];

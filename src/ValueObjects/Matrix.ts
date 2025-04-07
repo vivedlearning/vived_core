@@ -18,12 +18,12 @@ export type MatrixArray = [
   number,
   number,
   number,
-  number
+  number,
 ];
 
 export class Matrix {
   /**
-   * Consructs an identity matrix
+   * Constructs an identity matrix
    * @returns An identity matrix
    */
   public static Identity(): Matrix {
@@ -31,7 +31,7 @@ export class Matrix {
   }
 
   /**
-   * Constructs an matrix of zeros
+   * Constructs a matrix of zeros
    * @returns A matrix of zeros
    */
   public static Zero(): Matrix {
@@ -39,7 +39,7 @@ export class Matrix {
   }
 
   /**
-   * Compares two matricies
+   * Compares two matrices
    * @param a Matrix A
    * @param b Matrix B
    * @returns True if all the elements in matrix A are equal to all the elements of matrix B
@@ -59,7 +59,7 @@ export class Matrix {
    * Checks to see if Matrix A is close to Matrix B by comparing elements
    * @param a Matrix A
    * @param b Matrix B
-   * @param threshold "Close" thershold. Defaults to 0.001
+   * @param threshold "Close" threshold. Defaults to 0.001
    * @returns True if all the difference between the elements in each array is less than the threshold
    */
   public static Close(a: Matrix, b: Matrix, threshold = 0.001): boolean {
@@ -163,7 +163,7 @@ export class Matrix {
   }
 
   /**
-   * Composes a matrix from a scale vector, rotation quaterion, and translation vector
+   * Composes a matrix from a scale vector, rotation quaternion, and translation vector
    * @param scale The scale of the transformation matrix
    * @param rotation The rotation of the transformation matrix
    * @param translation The translation of the transformation matrix
@@ -387,10 +387,7 @@ export class Matrix {
    * @param scale The new scale value
    * @returns A new matrix that is the same as the original but the scale has been changed
    */
-  public static SetMatrixScale(
-    original: Matrix,
-    scale: Vector3
-  ): Matrix {
+  public static SetMatrixScale(original: Matrix, scale: Vector3): Matrix {
     const rotation = original.rotation;
     const translation = original.translation;
 
@@ -419,8 +416,8 @@ export class Matrix {
       array[12],
       array[13],
       array[14],
-      array[15]
-    ]
+      array[15],
+    ];
 
     return new Matrix(matrixArray);
   }
@@ -496,18 +493,18 @@ export class Matrix {
   get scale(): Vector3 {
     const x = Math.sqrt(
       this._m[0] * this._m[0] +
-      this._m[1] * this._m[1] +
-      this._m[2] * this._m[2]
+        this._m[1] * this._m[1] +
+        this._m[2] * this._m[2]
     );
     let y = Math.sqrt(
       this._m[4] * this._m[4] +
-      this._m[5] * this._m[5] +
-      this._m[6] * this._m[6]
+        this._m[5] * this._m[5] +
+        this._m[6] * this._m[6]
     );
     const z = Math.sqrt(
       this._m[8] * this._m[8] +
-      this._m[9] * this._m[9] +
-      this._m[10] * this._m[10]
+        this._m[9] * this._m[9] +
+        this._m[10] * this._m[10]
     );
 
     if (this.determinate <= 0) {
