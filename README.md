@@ -55,7 +55,29 @@ The architecture implements a clean separation of concerns through specialized c
    - UI representation components
    - Consumes view models and renders UI
 
-## Example Usage
+## Example Implementation
+
+The package includes a fully implemented `ExampleFeature` that demonstrates the App Object Component architecture. This example demonstrates how to structure your code following the recommended patterns:
+
+### Directory Structure
+- **Entities/** - Domain models for storing and managing state
+- **PMs/** - Presentation Managers that transform data for UI consumption
+- **UCs/** - Use Cases that implement business logic operations
+- **Controllers/** - Simplified API for UI interaction
+- **Adapters/** - Connect UI frameworks to PMs
+- **Mocks/** - Test doubles for unit testing
+
+### Implementation Patterns
+The example demonstrates:
+- Observable entities with memoized properties
+- Presentation managers with view model transformation
+- Use cases that implement business logic
+- Controllers that provide a simple UI-friendly API
+- Component registration and retrieval
+- Singleton component access
+- Test patterns for each component type
+
+### Sample Usage
 
 ```typescript
 // Create a repository and an app object
@@ -92,6 +114,8 @@ class MyPM extends AppObjectPM<{value: number}> {
 
 // The architecture enables clean, testable, and maintainable code
 ```
+
+Refer to the `ExampleFeature` directory for a complete implementation example that shows the interaction between all component types.
 
 ## Value Objects
 
