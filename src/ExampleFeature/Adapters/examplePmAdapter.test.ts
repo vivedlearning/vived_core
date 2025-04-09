@@ -8,10 +8,26 @@ describe("Example PM Adapter", () => {
   let appObject: AppObject;
   let mockPM: ExamplePM;
   const testId = "test-appobject-id";
+  let originalWarningFn: any;
+  let originalErrorFn: any;
 
   beforeEach(() => {
     appObjects = makeAppObjectRepo();
     appObject = appObjects.getOrCreate(testId);
+    
+    // Save original functions
+    originalWarningFn = appObjects.submitWarning;
+    originalErrorFn = appObjects.submitError;
+    
+    // Replace with silent mocks to prevent console output
+    appObjects.submitWarning = jest.fn();
+    appObjects.submitError = jest.fn();
+  });
+  
+  afterEach(() => {
+    // Restore original functions
+    if (originalWarningFn) appObjects.submitWarning = originalWarningFn;
+    if (originalErrorFn) appObjects.submitError = originalErrorFn;
   });
 
   it("has an empty string as default VM", () => {

@@ -10,19 +10,26 @@ describe("Example Singleton PM Adapter", () => {
   let appObjects: AppObjectRepo;
   let mockPM: ExampleSingletonPM;
   let originalSubmitError: any;
+  let originalSubmitWarning: any;
 
   beforeEach(() => {
     appObjects = makeAppObjectRepo();
-    // Save original submitError function
+    // Save original functions
     originalSubmitError = appObjects.submitError;
-    // Replace with silent mock to prevent console warnings
+    originalSubmitWarning = appObjects.submitWarning;
+    
+    // Replace with silent mocks to prevent console output
     appObjects.submitError = jest.fn();
+    appObjects.submitWarning = jest.fn();
   });
 
   afterEach(() => {
-    // Restore original function after test
+    // Restore original functions after test
     if (originalSubmitError) {
       appObjects.submitError = originalSubmitError;
+    }
+    if (originalSubmitWarning) {
+      appObjects.submitWarning = originalSubmitWarning;
     }
   });
 

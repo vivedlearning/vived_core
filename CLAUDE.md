@@ -5,8 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build & Test Commands
 - Build: `npm run build`
 - Lint: `npm run lint`
-- Run all tests: `npm run testOnce`
-- Run tests in watch mode: `npm run test`
+- Run unit tests: `npm run testOnce`
+- Run unit tests in watch mode: `npm run test`
+- Run integration tests: `npm run test:integration`
+- Run integration tests in watch mode: `npm run test:integration:watch`
 - Run single test file: `jest --config jestconfig.json path/to/test.ts`
 
 ## Code Style Guidelines
