@@ -47,7 +47,7 @@ export const exampleSingletonPmAdapter: SingletonPmAdapter<ExampleVM> = {
     // Find the singleton PM using its static get method
     const pm = ExampleSingletonPM.get(appObjects);
     if (!pm) {
-      appObjects.submitError(
+      appObjects.submitWarning(
         "exampleSingletonPmAdapter",
         "Unable to find ExampleSingletonPM"
       );

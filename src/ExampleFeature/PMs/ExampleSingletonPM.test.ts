@@ -78,6 +78,6 @@ describe("ExampleSingletonPM", () => {
   });
 
   it("should register itself as a singleton", () => {
-    expect(registerSingletonSpy).toBeCalledWith(pm);
+    expect(registerSingletonSpy).toHaveBeenCalledWith(pm);
   });
 });

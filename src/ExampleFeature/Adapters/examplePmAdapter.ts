@@ -50,7 +50,7 @@ export const examplePmAdapter: PmAdapter<string> = {
     // Find the PM using the provided ID
     const pm = ExamplePM.getById(id, appObjects);
     if (!pm) {
-      appObjects.submitError("examplePmAdapter", "Unable to find ExamplePM");
+      appObjects.submitWarning("examplePmAdapter", "Unable to find ExamplePM");
       return;
     }
     

@@ -9,29 +9,11 @@ import { exampleSingletonPmAdapter } from "./exampleSingletonPmAdapter";
 describe("Example Singleton PM Adapter", () => {
   let appObjects: AppObjectRepo;
   let mockPM: ExampleSingletonPM;
-  let originalSubmitError: any;
-  let originalSubmitWarning: any;
 
   beforeEach(() => {
     appObjects = makeAppObjectRepo();
-    // Save original functions
-    originalSubmitError = appObjects.submitError;
-    originalSubmitWarning = appObjects.submitWarning;
-    
-    // Replace with silent mocks to prevent console output
-    appObjects.submitError = jest.fn();
-    appObjects.submitWarning = jest.fn();
   });
 
-  afterEach(() => {
-    // Restore original functions after test
-    if (originalSubmitError) {
-      appObjects.submitError = originalSubmitError;
-    }
-    if (originalSubmitWarning) {
-      appObjects.submitWarning = originalSubmitWarning;
-    }
-  });
 
   it("Sets the Default VM", () => {
     mockPM = makeMockExampleSingletonPM(appObjects);
@@ -50,12 +32,12 @@ describe("Example Singleton PM Adapter", () => {
   });
 
   it("Handles missing PM on subscribe", () => {
-    const submitErrorSpy = jest.spyOn(appObjects, "submitError");
+    appObjects.submitWarning = jest.fn();
     const setVM = jest.fn();
 
     exampleSingletonPmAdapter.subscribe(appObjects, setVM);
 
-    expect(submitErrorSpy).toHaveBeenCalledWith(
+    expect(appObjects.submitWarning).toHaveBeenCalledWith(
       "exampleSingletonPmAdapter",
       "Unable to find ExampleSingletonPM"
     );
@@ -72,10 +54,12 @@ describe("Example Singleton PM Adapter", () => {
 
   it("Handles missing PM on unsubscribe without error", () => {
     const setVM = jest.fn();
-
+    appObjects.submitWarning = jest.fn();
+    
     // This should not throw an error
     expect(() => {
       exampleSingletonPmAdapter.unsubscribe(appObjects, setVM);
     }).not.toThrow();
   });
+  
 });

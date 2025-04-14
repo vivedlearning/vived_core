@@ -1,6 +1,6 @@
 {
   "name": "@vived/core",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Core Components for VIVED Apps and Hosts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
