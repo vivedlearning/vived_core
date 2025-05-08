@@ -23,6 +23,13 @@ export abstract class DomainFactory extends AppObjectEntity {
   static type = "DomainFactory";
 
   /**
+   * The name of this domain factory
+   * This should be set by concrete implementations to allow domain factories
+   * to be located by name.
+   */
+  readonly factoryName: string = "";
+
+  /**
    * Set up entities for this domain.
    * This phase should create and configure all data models and repositories.
    */

@@ -66,6 +66,16 @@ export class DomainFactoryRepo extends AppObjectEntityRepo<DomainFactory> {
   };
 
   /**
+   * Retrieves a domain factory by its name.
+   * @param name The name of the domain factory to find
+   * @returns The matching domain factory or undefined if not found
+   */
+  getByName(name: string): DomainFactory | undefined {
+    const allFactories = this.getAll();
+    return allFactories.find((factory) => factory.factoryName === name);
+  }
+
+  /**
    * Creates a new DomainFactoryRepo and registers it with the given AppObject.
    * @param appObject The parent AppObject this component will be attached to
    */

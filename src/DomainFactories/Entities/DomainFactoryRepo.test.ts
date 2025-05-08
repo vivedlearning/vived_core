@@ -8,13 +8,20 @@ describe("DomainFactoryRepo", () => {
   let repo: DomainFactoryRepo;
   let mockFactory1: MockDomainFactory;
   let mockFactory2: MockDomainFactory;
-
   beforeEach(() => {
     appObjects = makeAppObjectRepo();
     appObject = appObjects.getOrCreate("test object name");
     repo = new DomainFactoryRepo(appObject);
-    mockFactory1 = new MockDomainFactory(appObjects.getOrCreate("factory1"));
-    mockFactory2 = new MockDomainFactory(appObjects.getOrCreate("factory2"));
+
+    // Create mock factories and add them to the repository
+    const factory1AO = appObjects.getOrCreate("factory1");
+    const factory2AO = appObjects.getOrCreate("factory2");
+    mockFactory1 = new MockDomainFactory(factory1AO);
+    mockFactory2 = new MockDomainFactory(factory2AO);
+
+    // Manually register the factories with the repository
+    repo["entityLookup"].set(factory1AO.id, mockFactory1);
+    repo["entityLookup"].set(factory2AO.id, mockFactory2);
   });
 
   it("is retrievable via static get method", () => {
@@ -87,13 +94,17 @@ describe("DomainFactoryRepo", () => {
     ]);
   });
   it("retrieves a domain factory by name", () => {
-    // For testing, we'll access the factoryName that should be provided by MockDomainFactory
-    const factoryName1 = mockFactory1.factoryName;
-    const factoryName2 = mockFactory2.factoryName;
+    // Override the default factory names for the test
+    Object.defineProperty(mockFactory1, "factoryName", {
+      value: "TestFactory1",
+    });
+    Object.defineProperty(mockFactory2, "factoryName", {
+      value: "TestFactory2",
+    });
 
     // Test retrieving by name
-    expect(repo.getByName(factoryName1)).toBe(mockFactory1);
-    expect(repo.getByName(factoryName2)).toBe(mockFactory2);
+    expect(repo.getByName("TestFactory1")).toBe(mockFactory1);
+    expect(repo.getByName("TestFactory2")).toBe(mockFactory2);
     expect(repo.getByName("NonExistentFactory")).toBeUndefined();
   });
 });
