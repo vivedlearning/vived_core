@@ -1,3 +1,4 @@
+import { AppObject } from "../../AppObject";
 import { DomainFactory } from "../Entities/DomainFactory";
 
 /**
@@ -14,6 +15,9 @@ import { DomainFactory } from "../Entities/DomainFactory";
  * setupDomain method and ensuring the proper sequence of setup phases.
  */
 export class MockDomainFactory extends DomainFactory {
+  /** The name of this factory */
+  readonly factoryName = "MockDomainFactory";
+
   /** Mock implementation of setting up entities */
   setupEntities = jest.fn();
 
@@ -25,4 +29,12 @@ export class MockDomainFactory extends DomainFactory {
 
   /** Mock implementation of the final setup phase */
   finalSetup = jest.fn();
+
+  /**
+   * Creates a new MockDomainFactory instance
+   * @param appObject The parent AppObject this component will be attached to
+   */
+  constructor(appObject: AppObject) {
+    super(appObject);
+  }
 }

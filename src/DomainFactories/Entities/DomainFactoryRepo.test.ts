@@ -1,4 +1,4 @@
-import { AppObject, AppObjectRepo, makeAppObjectRepo } from "@vived/core";
+import { AppObject, AppObjectRepo, makeAppObjectRepo } from "../../AppObject";
 import { MockDomainFactory } from "../Mocks/MockDomainFactory";
 import { DomainFactoryRepo } from "./DomainFactoryRepo";
 
@@ -52,7 +52,6 @@ describe("DomainFactoryRepo", () => {
     expect(mockFactory1.finalSetup).toHaveBeenCalled();
     expect(mockFactory2.finalSetup).toHaveBeenCalled();
   });
-
   it("executes setup steps in the correct order", () => {
     const sequence: string[] = [];
 
@@ -84,7 +83,17 @@ describe("DomainFactoryRepo", () => {
       "setupPMs1",
       "setupPMs2",
       "finalSetup1",
-      "finalSetup2"
+      "finalSetup2",
     ]);
+  });
+  it("retrieves a domain factory by name", () => {
+    // For testing, we'll access the factoryName that should be provided by MockDomainFactory
+    const factoryName1 = mockFactory1.factoryName;
+    const factoryName2 = mockFactory2.factoryName;
+
+    // Test retrieving by name
+    expect(repo.getByName(factoryName1)).toBe(mockFactory1);
+    expect(repo.getByName(factoryName2)).toBe(mockFactory2);
+    expect(repo.getByName("NonExistentFactory")).toBeUndefined();
   });
 });
