@@ -126,20 +126,17 @@ export class Vector2 {
   public static Dot = (a: Vector2, b: Vector2): number => {
     return a.x * b.x + a.y * b.y;
   };
-
   /**
-   * Calculates the dot product between Vectors A and B
+   * Calculates the angle between Vectors A and B
    * @param a Vector A
    * @param b Vector B
-   * @returns A . B
+   * @returns The angle between A and B
    */
   public static AngleBetween = (a: Vector2, b: Vector2): Angle => {
-    const dot = Vector2.Dot(a, b);
-    const magnitudes = a.magnitude * b.magnitude;
+    const angleA = Math.atan2(a.y, a.x);
+    const angleB = Math.atan2(b.y, b.x);
 
-    const angRadians = Math.acos(dot / magnitudes);
-
-    return Angle.FromRadians(angRadians);
+    return Angle.FromRadians(angleB - angleA);
   };
 
   /**
@@ -165,7 +162,7 @@ export class Vector2 {
     const magnitude = Math.sqrt(xSqr + ySqr);
     return magnitude;
   }
-  
+
   /**
    * @deprecated Use magnitude instead - this property is kept for backward compatibility
    * Get the magnitude (length) of the vector

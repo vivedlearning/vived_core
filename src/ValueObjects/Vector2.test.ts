@@ -134,8 +134,51 @@ describe("Vector 2 static actions", () => {
     const v1 = new Vector2(1, 2);
     const v2 = new Vector2(3, 4);
 
-    const angle = Vector2.AngleBetween(v1, v2);
+    const angle = Vector2.AngleBetween(v2, v1);
     expect(angle.degrees).toBeCloseTo(10.305);
+  });
+
+  it("Calculates the angle between two vectors with a negative result", () => {
+    const v1 = new Vector2(1, 2);
+    const v2 = new Vector2(3, 4);
+
+    const angle = Vector2.AngleBetween(v1, v2);
+    expect(angle.degrees).toBeCloseTo(-10.305);
+  });
+
+  it("Handles perpendicular vectors correctly", () => {
+    const v1 = new Vector2(1, 0);
+    const v2 = new Vector2(0, 1);
+
+    const angle = Vector2.AngleBetween(v1, v2);
+    expect(angle.degrees).toBeCloseTo(90);
+  });
+
+  it("Handles opposite vectors correctly", () => {
+    const v1 = new Vector2(1, 0);
+    const v2 = new Vector2(-1, 0);
+
+    const angle = Vector2.AngleBetween(v1, v2);
+    expect(angle.degrees).toBeCloseTo(180);
+  });
+
+  it("Handles parallel vectors correctly", () => {
+    const v1 = new Vector2(1, 0);
+    const v2 = new Vector2(2, 0);
+
+    const angle = Vector2.AngleBetween(v1, v2);
+    expect(angle.degrees).toBeCloseTo(0);
+  });
+
+  it("Handles zero vectors gracefully", () => {
+    const v1 = new Vector2(0, 0);
+    const v2 = new Vector2(1, 0);
+
+    const angle = Vector2.AngleBetween(v1, v2);
+    expect(angle.degrees).toEqual(0);
+
+    const angle2 = Vector2.AngleBetween(v2, v1);
+    expect(angle2.degrees).toEqual(0);
   });
 
   it("Calculates a Cross product", () => {
